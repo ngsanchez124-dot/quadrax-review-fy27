@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Education & Readiness Review</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F5F6F8; --surface:#FFFFFF; --surface2:#EEF1F5; --ink:#101A2B; --fg:#1C2536; --muted:#5D6779; --line:#DCE1E8;
+  --accent:#E8590C; --accent-soft:#FDEBDD; --mast:#0F1B2D; --mast-fg:#F2F4F8; --mast-muted:#9FB0CC;
+  --good:#1F7A45; --good-soft:#E3F3E8; --warn:#A15C00; --warn-soft:#FBEFD9; --bad:#B42318; --bad-soft:#FBE4E1; --info:#2F5DA8; --info-soft:#E3ECF8;
+  --display:"Inter Tight","Inter",system-ui,sans-serif; --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B111C; --surface:#121A28; --surface2:#182235; --ink:#EEF2F8; --fg:#D9E0EB; --muted:#93A0B6; --line:#243149;
+  --accent:#FF7A33; --accent-soft:#3A2414; --mast:#070C15; --mast-fg:#F2F4F8; --mast-muted:#8597B5;
+  --good:#5CC48A; --good-soft:#123222; --warn:#E8B04B; --warn-soft:#352812; --bad:#F2877C; --bad-soft:#3A1916; --info:#86A9E8; --info-soft:#16253F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B111C; --surface:#121A28; --surface2:#182235; --ink:#EEF2F8; --fg:#D9E0EB; --muted:#93A0B6; --line:#243149;
+  --accent:#FF7A33; --accent-soft:#3A2414; --mast:#070C15; --mast-fg:#F2F4F8; --mast-muted:#8597B5;
+  --good:#5CC48A; --good-soft:#123222; --warn:#E8B04B; --warn-soft:#352812; --bad:#F2877C; --bad-soft:#3A1916; --info:#86A9E8; --info-soft:#16253F; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55}
+a{color:var(--accent)} a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.mast{background:var(--mast);color:var(--mast-fg);position:sticky;top:0;z-index:5}
+.mast .top{display:flex;align-items:center;gap:16px;padding-block:14px;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.brand .eyebrow{font:600 11px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--mast-muted)}
+.brand .name{font:600 19px/1.2 var(--display);letter-spacing:-.01em}
+.lang{display:flex;border:1px solid #2B3B57;border-radius:999px;overflow:hidden}
+.lang button{background:transparent;color:var(--mast-muted);border:0;padding:7px 14px;font:600 12.5px var(--body);cursor:pointer;letter-spacing:.04em}
+.lang button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.theme{background:transparent;border:1px solid #2B3B57;color:var(--mast-muted);border-radius:999px;padding:7px 12px;font:500 12.5px var(--body);cursor:pointer}
+nav.rail{display:flex;gap:4px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+nav.rail .tab{background:transparent;border:0;cursor:pointer;color:var(--mast-muted);font:500 13.5px var(--body);padding:8px 12px;border-radius:8px;white-space:nowrap}
+nav.rail .tab[aria-current="page"]{color:#fff;background:#1C2A42;box-shadow:inset 0 -2px 0 var(--accent)}
+.de-banner{background:var(--accent-soft);color:var(--ink);font-size:13.5px}
+.de-banner .wrap{display:flex;gap:10px;align-items:center;padding-block:9px;flex-wrap:wrap}
+.de-banner button{background:var(--accent);color:#fff;border:0;border-radius:999px;padding:5px 12px;font:600 12.5px var(--body);cursor:pointer}
+main{padding-block:28px 64px}
+section.view{display:none} section.view.on{display:block}
+h1{font:600 clamp(26px,3.6vw,38px)/1.12 var(--display);letter-spacing:-.02em;color:var(--ink);margin:0 0 10px;text-wrap:balance}
+h2{font:600 21px/1.25 var(--display);color:var(--ink);margin:34px 0 12px;letter-spacing:-.01em;text-wrap:balance}
+h3{font:600 15.5px/1.3 var(--display);color:var(--ink);margin:0 0 6px}
+.lede{font-size:16.5px;color:var(--fg);max-width:70ch;margin:0 0 6px}
+.kicker{font:600 11.5px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.muted{color:var(--muted)} .small{font-size:13px} .mono{font-family:var(--mono);font-size:12.5px}
+.grid{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))} .g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))} .g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;min-width:0}
+.stat .v{font:600 30px/1.05 var(--display);color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.stat .l{font-size:13px;color:var(--muted);margin-top:4px}
+.stat .s{font-size:12.5px;margin-top:8px;color:var(--fg)}
+.callout{border-left:3px solid var(--accent);background:var(--surface);border-radius:0 10px 10px 0;padding:14px 16px;margin:16px 0}
+.callout.good{border-color:var(--good)} .callout.info{border-color:var(--info)}
+.pill{display:inline-flex;align-items:center;gap:6px;font:600 11.5px var(--body);padding:3px 9px;border-radius:999px;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.p-active{background:var(--good-soft);color:var(--good)} .p-slipping{background:var(--warn-soft);color:var(--warn)} .p-stale{background:var(--bad-soft);color:var(--bad)} .p-never{background:var(--surface2);color:var(--muted)}
+.p-info{background:var(--info-soft);color:var(--info)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th{text-align:left;font:600 11.5px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:11px 12px;border-bottom:1px solid var(--line);background:var(--surface2);white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right}
+tr.click{cursor:pointer} tr.click:hover td{background:var(--surface2)}
+.bar{height:8px;background:var(--surface2);border-radius:99px;overflow:hidden;min-width:80px}
+.bar>i{display:block;height:100%;background:var(--accent);border-radius:99px}
+.fam-row{display:grid;grid-template-columns:minmax(150px,1.2fr) 2fr 70px 70px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.fam-row:last-child{border-bottom:0}
+.focus-tag{font:600 10.5px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-left:6px}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.controls input,.controls select{background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:14px var(--body);min-width:0}
+.controls input{flex:1 1 220px}
+.drawer{background:var(--surface2);padding:12px 14px;border-radius:8px}
+.drawer ul{margin:6px 0 0;padding-left:18px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
+.steps li::before{content:counter(s);font:600 12px var(--display);background:var(--ink);color:var(--surface);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;margin-top:1px}
+.links a{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.links a:last-child{border-bottom:0} .links a span:last-child{color:var(--accent);font-size:13px;white-space:nowrap}
+.path ol{margin:6px 0 0;padding-left:20px} .path li{margin:3px 0}
+.stage{border-top:1px solid var(--line);padding-top:8px;margin-top:8px}
+.stage b{font:600 12px var(--body);letter-spacing:.04em;text-transform:uppercase;color:var(--accent)}
+.who{font-size:12.5px;color:var(--muted);margin:2px 0 8px}
+.empty{padding:22px;text-align:center;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding-block:22px;font-size:12.5px;color:var(--muted)}
+.copy{background:var(--surface2);border:1px solid var(--line);border-radius:6px;padding:2px 8px;font:500 12px var(--body);color:var(--fg);cursor:pointer;margin-left:6px}
+@media (max-width:640px){.fam-row{grid-template-columns:1fr 60px 60px}.fam-row .bar{grid-column:1/-1;order:5}.stat .v{font-size:26px}}
+@media print{header.mast{position:static}.de-banner,nav.rail,.lang,.theme{display:none}section.view{display:block!important;page-break-after:always}}
+</style>
+</head>
+<body>
+<header class="mast">
+  <div class="wrap">
+    <div class="top">
+      <div class="brand"><span class="eyebrow" id="eyebrow"></span><span class="name" data-i="title"></span></div>
+      <div class="lang" role="group" aria-label="Language"><button id="b-en" type="button" aria-pressed="false">EN</button><button id="b-l2" type="button" aria-pressed="true">ES</button></div>
+      <button class="theme" id="themeBtn" type="button" data-i="theme"></button>
+    </div>
+    <nav class="rail" id="rail" aria-label="Sections"></nav>
+  </div>
+</header>
+<div class="de-banner" id="deBanner"><div class="wrap"><span data-i="bannerText"></span><button type="button" id="bannerBtn"></button></div></div>
+<main class="wrap" id="main">
+  <section class="view" id="v-overview"></section>
+  <section class="view" id="v-team"></section>
+  <section class="view" id="v-plans"></section>
+  <section class="view" id="v-certs"></section>
+  <section class="view" id="v-coverage"></section>
+  <section class="view" id="v-paths"></section>
+  <section class="view" id="v-program"></section>
+</main>
+<footer><div class="wrap" id="foot"></div></footer>
+<script>
+const DATA = {"asOf": "2026-11-19", "people": [{"name": "Eduardo Parada", "last": "2026-09-25", "days": 55, "status": "slipping", "enroll": 8, "done": 8, "prog": 0, "rate": 100, "certs": 1, "bca": 1, "bcp": 0, "top": ["itsm", "sales", "plat"], "courses": [{"cat": "Helix Digital Workplace", "title": "23.3.01 BMC Helix Digital Workplace New Feature", "status": "Completed", "enrolled": "", "completed": "2025-07-15", "type": "", "fam": "itsm", "excluded": false}, {"cat": "Helix Dashboards", "title": "24.2.01 BMC Helix Dashboards New Features", "status": "Completed", "enrolled": "", "completed": "2025-07-15", "type": "", "fam": "plat", "excluded": false}, {"cat": "Helix ITSM", "title": "BMC Certified Associate: Helix ITSM 20.x for Administrators Online Exam v.2-N", "status": "Completed", "enrolled": "", "completed": "2025-10-12", "type": "", "fam": "itsm", "excluded": false}, {"cat": "Helix Digital Workplace", "title": "BMC Helix Data Manager: Fundamentals Migrating Remedyforce Data (WBT) v.1-N", "status": "Completed", "enrolled": "", "completed": "2023-11-26", "type": "", "fam": "itsm", "excluded": false}, {"cat": "Helix ITSM", "title": "BMC Helix ITSM 22.x Skills Assessment", "status": "Completed", "enrolled": "", "completed": "2025-10-08", "type": "", "fam": "itsm", "excluded": false}, {"cat": "Global Sales Enablement", "title": "BMC Helix Partner Sales Certification: Foundation", "status": "Completed", "enrolled": "", "completed": "2026-07-10", "type": "", "fam": "sales", "excluded": false}, {"cat": "Bootcamps", "title": "BMC Helix Technical Bootcamp - Advanced AIOPs", "status": "Completed", "enrolled": "", "completed": "2025-09-19", "type": "", "fam": "sales", "excluded": false}, {"cat": "Bootcamps", "title": "BMC Helix Technical Bootcamp - VSE Solution Demo", "status": "Completed", "enrolled": "", "completed": "2025-08-28", "type": "", "fam": "sales", "excluded": false}], "certList": [{"title": "BMC Certified Associate: Helix ITSM 20.x for Administrators", "issued": "2025-10-12", "renew": "2027-10-12", "active": true, "level": "BCA", "fam": "itsm"}]}, {"name": "Edgar Pinedo", "last": "2025-11-02", "days": 382, "status": "stale", "enroll": 1, "done": 1, "prog": 0, "rate": 100, "certs": 1, "bca": 1, "bcp": 0, "top": ["itsm"], "courses": [{"cat": "Helix ITSM", "title": "BMC Certified Associate: Helix ITSM 22.x for Administrators Online Exam", "status": "Completed", "enrolled": "", "completed": "2025-11-02", "type": "", "fam": "itsm", "excluded": false}], "certList": [{"title": "BMC Certified Associate: Helix ITSM 22.x for Administrators", "issued": "2025-11-02", "renew": "2027-11-02", "active": true, "level": "BCA", "fam": "itsm"}]}, {"name": "Victor Romero", "last": "2025-10-26", "days": 389, "status": "stale", "enroll": 1, "done": 1, "prog": 0, "rate": 100, "certs": 1, "bca": 1, "bcp": 0, "top": ["itsm"], "courses": [{"cat": "Helix ITSM", "title": "BMC Certified Associate: Helix ITSM 22.x for Administrators Online Exam", "status": "Completed", "enrolled": "", "completed": "2025-10-26", "type": "", "fam": "itsm", "excluded": false}], "certList": [{"title": "BMC Certified Associate: Helix ITSM 22.x for Administrators", "issued": "2025-10-26", "renew": "2027-10-26", "active": true, "level": "BCA", "fam": "itsm"}]}, {"name": "Osvaldo Jiménez", "last": "2026-10-26", "days": 24, "status": "active", "enroll": 2, "done": 2, "prog": 0, "rate": 100, "certs": 0, "bca": 0, "bcp": 0, "top": ["sales"], "courses": [{"cat": "Global Sales Enablement", "title": "BMC Helix Partner Sales Certification: Foundation", "status": "Completed", "enrolled": "", "completed": "2026-10-26", "type": "", "fam": "sales", "excluded": false}, {"cat": "Sales Kickoff", "title": "FY24 SKO | DSOM Pre-work", "status": "Completed", "enrolled": "", "completed": "2023-04-20", "type": "", "fam": "sales", "excluded": false}], "certList": []}, {"name": "Israel Ortega", "last": "2026-07-01", "days": 141, "status": "stale", "enroll": 4, "done": 1, "prog": 2, "rate": 25, "certs": 0, "bca": 0, "bcp": 0, "top": ["sales"], "courses": [{"cat": "Helix Dashboards", "title": "BMC Helix Dashboards 23.x: Fundamentals Migrating Reports (WBT)", "status": "In Progress", "enrolled": "", "completed": "", "type": "", "fam": "plat", "excluded": false}, {"cat": "Helix Dashboards", "title": "BMC Helix Dashboards 23.x: Fundamentals Using (WBT)", "status": "In Progress", "enrolled": "", "completed": "", "type": "", "fam": "plat", "excluded": false}, {"cat": "Global Sales Enablement", "title": "BMC Helix Partner Sales Certification: Foundation", "status": "Completed", "enrolled": "", "completed": "2026-06-30", "type": "", "fam": "sales", "excluded": false}, {"cat": "Helix Learning", "title": "Welcome to Helix Learning", "status": "Enrolled", "enrolled": "", "completed": "", "type": "", "fam": "other", "excluded": false}], "certList": []}, {"name": "Alberto Zavaleta", "last": "2026-10-15", "days": 35, "status": "slipping", "enroll": 1, "done": 0, "prog": 1, "rate": 0, "certs": 0, "bca": 0, "bcp": 0, "top": [], "courses": [{"cat": "Global Sales Enablement", "title": "BMC Helix Partner Sales Certification: Foundation", "status": "In Progress", "enrolled": "", "completed": "", "type": "", "fam": "sales", "excluded": false}], "certList": []}, {"name": "Ricardo Simancas", "last": "2026-11-12", "days": 7, "status": "active", "enroll": 1, "done": 0, "prog": 1, "rate": 0, "certs": 0, "bca": 0, "bcp": 0, "top": [], "courses": [{"cat": "Helix Learning", "title": "Welcome to Helix Learning", "status": "In Progress", "enrolled": "", "completed": "", "type": "", "fam": "other", "excluded": false}], "certList": []}]};
+const PARTNER = {"name": "Quadrax", "legalName": "Quadrax S.A. de C.V.", "lang": "es", "defaultLang": "es", "partnerManager": "Miguel Zaldivar", "focus": ["itsm", "plat", "disc", "gpt"], "base": {"en": "Everyone shares the same base: Helix ITSM 23.x fundamentals and administration, plus HelixGPT fundamentals. Today 3 people hold an Associate certification in Helix ITSM (20.x or 22.x); nobody has 23.x yet.", "l2": "Todo el equipo comparte la misma base: fundamentos y administración de Helix ITSM 23.x, más fundamentos de HelixGPT. Hoy 3 personas tienen certificación Associate de Helix ITSM (20.x o 22.x); nadie tiene aún la 23.x."}, "gap": {"en": "The specializations Quadrax needs next have no certified person yet: development (Innovation Studio, Business Workflows), Helix Data Manager for migrations, on-premises installation with containers and Kubernetes, CMDB and Discovery, Digital Workplace Catalog, and HelixGPT agents.", "l2": "Las especializaciones que Quadrax necesita aún no tienen una persona certificada: desarrollo (Innovation Studio, Business Workflows), Helix Data Manager para migraciones, instalación on-premises con contenedores y Kubernetes, CMDB y Discovery, Digital Workplace Catalog y agentes de HelixGPT."}, "next30": {"en": "By mid-December: Lissette, Ricardo and Alberto are on the partner subscription, everyone has started the common foundation, the HDM candidate is named and enrolled, and bootcamp nominations are in for CMDB Modernization (Dec 7), HelixGPT (Dec 14) and ITSM-ITOM On Prem (Dec 15).", "l2": "Para mediados de diciembre: Lissette, Ricardo y Alberto están en la suscripción de socio, todo el equipo inició la formación común, el candidato a HDM está definido e inscrito, y las nominaciones están enviadas para CMDB Modernization (7 de diciembre), HelixGPT (14 de diciembre) e ITSM-ITOM On Prem (15 de diciembre)."}, "stages": [{"h": {"en": "Common foundation (December).", "l2": "Formación común (diciembre)."}, "d": {"en": "Helix ITSM 23.x fundamentals and administration, and HelixGPT fundamentals, for everyone.", "l2": "Fundamentos y administración de Helix ITSM 23.x y fundamentos de HelixGPT para todo el equipo."}}, {"h": {"en": "Technical specialization (January to February).", "l2": "Especialización técnica (enero a febrero)."}, "d": {"en": "Each consultant follows the path for the technologies assigned to them.", "l2": "Cada consultor sigue la ruta de las tecnologías que tiene asignadas."}}, {"h": {"en": "Certifications (February to March).", "l2": "Certificaciones (febrero a marzo)."}, "d": {"en": "One Associate exam per person in their specialization, plus Helix ITSM 23.x for the team.", "l2": "Un examen Associate por persona en su especialización, más Helix ITSM 23.x para el equipo."}}, {"h": {"en": "Continuous update (ongoing).", "l2": "Actualización continua (permanente)."}, "d": {"en": "New releases, AI and agents, and keeping presales certifications current.", "l2": "Nuevas versiones, IA y agentes, y mantener vigentes las certificaciones de preventa."}}], "plans": [{"n": "Eduardo Parada", "role": {"en": "Operations lead · architecture, development, infrastructure and AI", "l2": "Gerencia de Operaciones · arquitectura, desarrollo, infraestructura e IA"}, "now": {"en": "Associate Helix ITSM 20.x (valid until Oct 2027) · Partner Sales Foundation completed (Jul 2026) · Advanced AIOps and VSE Solution Demo bootcamps completed", "l2": "Associate Helix ITSM 20.x (vigente hasta oct 2027) · Partner Sales Foundation completada (jul 2026) · bootcamps Advanced AIOps y VSE Solution Demo completados"}, "s1": {"en": ["BMC Helix ITSM 23.x: Fundamentals Using (WBT), to see what changed since 20.x", "BMC HelixGPT 26.x: Fundamentals Concepts (WBT)"], "l2": ["BMC Helix ITSM 23.x: Fundamentals Using (WBT), para ver los cambios desde 20.x", "BMC HelixGPT 26.x: Fundamentals Concepts (WBT)"]}, "s2": {"en": ["Learning plan BMC Helix Innovation Studio 26.x: Administrators/Developer, including Helix Innovation Studio 26.x: Process Designer (ILT)", "BMC Helix Business Workflows 23.x: Advanced Administering (ILT)", "Learning plan BMC Helix Service Management On-Premises Deployment (containers and Kubernetes)", "Learning plan BMC HelixGPT Agentic AI, then HelixGPT 26.3: Fundamentals of Agent Design (ILT)", "BMC Helix Discovery 26.x: Fundamentals Concepts (WBT)"], "l2": ["Plan de aprendizaje BMC Helix Innovation Studio 26.x: Administrators/Developer, incluido Helix Innovation Studio 26.x: Process Designer (ILT)", "BMC Helix Business Workflows 23.x: Advanced Administering (ILT)", "Plan de aprendizaje BMC Helix Service Management On-Premises Deployment (contenedores y Kubernetes)", "Plan de aprendizaje BMC HelixGPT Agentic AI, luego HelixGPT 26.3: Fundamentals of Agent Design (ILT)", "BMC Helix Discovery 26.x: Fundamentals Concepts (WBT)"]}, "s3": {"en": ["BMC Certified Associate: Helix ITSM 23.x for Administrators Online Exam (upgrade from 20.x)", "BMC Certified Associate: Helix Innovation Studio 26.x for Developers Online Exam", "BMC Certified Associate: Helix Service Management On-Premises Deployment 25.x Online Exam"], "l2": ["BMC Certified Associate: Helix ITSM 23.x for Administrators Online Exam (actualización desde 20.x)", "BMC Certified Associate: Helix Innovation Studio 26.x for Developers Online Exam", "BMC Certified Associate: Helix Service Management On-Premises Deployment 25.x Online Exam"]}, "s4": {"en": ["Keep Partner Sales Foundation current and take the Solution Demo Bootcamp when it is scheduled", "HelixGPT agent creation for Digital Workplace and Dashboards"], "l2": ["Mantener vigente Partner Sales Foundation y tomar el Solution Demo Bootcamp cuando se programe", "Creación de agentes de HelixGPT para Digital Workplace y Dashboards"]}, "boot": {"en": "HelixGPT (Dec 14) and ITSM-ITOM On Prem (Dec 15). Agent Creation at its next session.", "l2": "HelixGPT (14 de diciembre) e ITSM-ITOM On Prem (15 de diciembre). Agent Creation en su próxima sesión."}}, {"n": "Ricardo Simancas", "role": {"en": "Development, Innovation Studio and infrastructure", "l2": "Desarrollo, Innovation Studio e infraestructura"}, "now": {"en": "Account since June; Welcome to Helix Learning in progress; not yet on the ITSM subscription (Nikki adds him)", "l2": "Cuenta desde junio; Welcome to Helix Learning en curso; aún no está en la suscripción de ITSM (Nikki lo agrega)"}, "s1": {"en": ["BMC Helix ITSM 23.x: Fundamentals Using (WBT)", "BMC Helix ITSM 23.x: Fundamentals Administering Applications (ILT)", "BMC HelixGPT 26.x: Fundamentals Concepts (WBT)"], "l2": ["BMC Helix ITSM 23.x: Fundamentals Using (WBT)", "BMC Helix ITSM 23.x: Fundamentals Administering Applications (ILT)", "BMC HelixGPT 26.x: Fundamentals Concepts (WBT)"]}, "s2": {"en": ["Learning plan BMC Helix Innovation Studio 26.x: Administrators/Developer: BMC Helix Innovation Studio 26.x: Fundamentals Developing (WBT), then Helix Innovation Studio 26.x: Developing a Codeless Application (ILT)", "Learning plan BMC Helix Business Workflows 23.x: Administrators", "Learning plan BMC Helix Service Management On-Premises Deployment, starting with BMC Helix Service Management: Planning On-Premises Deployment (WBT)", "Fundamentos de Kubernetes (general e-learning in Learn@Helix)"], "l2": ["Plan de aprendizaje BMC Helix Innovation Studio 26.x: Administrators/Developer: BMC Helix Innovation Studio 26.x: Fundamentals Developing (WBT), luego Helix Innovation Studio 26.x: Developing a Codeless Application (ILT)", "Plan de aprendizaje BMC Helix Business Workflows 23.x: Administrators", "Plan de aprendizaje BMC Helix Service Management On-Premises Deployment, comenzando con BMC Helix Service Management: Planning On-Premises Deployment (WBT)", "Fundamentos de Kubernetes (e-learning general en Learn@Helix)"]}, "s3": {"en": ["BMC Certified Associate: Helix ITSM 23.x for Administrators Online Exam (first Helix certification)", "BMC Certified Associate: Helix Innovation Studio 26.x for Developers Online Exam", "BMC Certified Associate: Helix Service Management On-Premises Deployment 25.x Online Exam"], "l2": ["BMC Certified Associate: Helix ITSM 23.x for Administrators Online Exam (primera certificación Helix)", "BMC Certified Associate: Helix Innovation Studio 26.x for Developers Online Exam", "BMC Certified Associate: Helix Service Management On-Premises Deployment 25.x Online Exam"]}, "s4": {"en": ["BMC HelixGPT Innovation Studio Tool Creation"], "l2": ["BMC HelixGPT Innovation Studio Tool Creation"]}, "boot": {"en": "ITSM-ITOM On Prem (Dec 15). Prerequisite: Linux and Kubernetes skills.", "l2": "ITSM-ITOM On Prem (15 de diciembre). Requisito: conocimientos de Linux y Kubernetes."}}, {"n": "Alberto Zavaleta", "role": {"en": "Development and configuration of Helix solutions", "l2": "Desarrollo y configuración de soluciones Helix"}, "now": {"en": "Account active as Luis Alberto Zavaleta Carrasco; Partner Sales Foundation in progress (14%); not yet on the ITSM subscription (Nikki adds him)", "l2": "Cuenta activa como Luis Alberto Zavaleta Carrasco; Partner Sales Foundation en curso (14%); aún no está en la suscripción de ITSM (Nikki lo agrega)"}, "s1": {"en": ["BMC Helix ITSM 23.x: Fundamentals Using (WBT)", "BMC Helix ITSM 23.x: Fundamentals Administering Applications (ILT)", "BMC HelixGPT 26.x: Fundamentals Concepts (WBT)", "Finish BMC Helix Partner Sales Certification: Foundation"], "l2": ["BMC Helix ITSM 23.x: Fundamentals Using (WBT)", "BMC Helix ITSM 23.x: Fundamentals Administering Applications (ILT)", "BMC HelixGPT 26.x: Fundamentals Concepts (WBT)", "Terminar BMC Helix Partner Sales Certification: Foundation"]}, "s2": {"en": ["Learning plan BMC Helix Business Workflows 23.x: Administrators", "BMC Helix Innovation Studio 26.x: Fundamentals Developing (WBT)", "Learning plan BMC Helix Digital Workplace 23.x: Catalog Administrator", "Learning plan Helix Dashboards 26.3: Administrator/Developer", "AR System: learning plan BMC AR System 22.x: Administrator"], "l2": ["Plan de aprendizaje BMC Helix Business Workflows 23.x: Administrators", "BMC Helix Innovation Studio 26.x: Fundamentals Developing (WBT)", "Plan de aprendizaje BMC Helix Digital Workplace 23.x: Catalog Administrator", "Plan de aprendizaje Helix Dashboards 26.3: Administrator/Developer", "AR System: plan de aprendizaje BMC AR System 22.x: Administrator"]}, "s3": {"en": ["BMC Certified Associate: Helix ITSM 23.x for Administrators Online Exam (first Helix certification)", "BMC Certified Associate: Helix Business Workflows 23.x for Administrators Online Exam", "BMC Certified Associate: Helix Digital Workplace 23.x for Catalog Administrators Online Exam"], "l2": ["BMC Certified Associate: Helix ITSM 23.x for Administrators Online Exam (primera certificación Helix)", "BMC Certified Associate: Helix Business Workflows 23.x for Administrators Online Exam", "BMC Certified Associate: Helix Digital Workplace 23.x for Catalog Administrators Online Exam"]}, "s4": {"en": ["BMC Certified Associate: Helix Innovation Studio 26.x for Developers Online Exam, once the development track is complete"], "l2": ["BMC Certified Associate: Helix Innovation Studio 26.x for Developers Online Exam, al terminar la ruta de desarrollo"]}}, {"n": "Victor Romero", "role": {"en": "ITSM processes, CMDB, Discovery and service management", "l2": "Procesos ITSM, CMDB, Discovery y gestión de servicios"}, "now": {"en": "Associate Helix ITSM 22.x (valid until Oct 2027); enrolled in the ITSM web-based subscription since May but has not logged in yet", "l2": "Associate Helix ITSM 22.x (vigente hasta oct 2027); inscrito en la suscripción ITSM Web-Based desde mayo, pero aún no ha entrado"}, "s1": {"en": ["Log in to Learn@Helix and confirm the subscription courses are visible", "BMC HelixGPT 26.x: Fundamentals Concepts (WBT)"], "l2": ["Entrar a Learn@Helix y confirmar que ve los cursos de la suscripción", "BMC HelixGPT 26.x: Fundamentals Concepts (WBT)"]}, "s2": {"en": ["Learning plan BMC Helix CMDB 22.x: Administrator, starting with BMC Helix CMDB 22.x: Fundamentals Administering - Part 1 (WBT)", "BMC Helix Discovery 26.x: Fundamentals Concepts (WBT), then learning plan BMC Discovery 24.x: Administrator", "Learning plan BMC Helix Digital Workplace 23.x: Catalog Administrator (builds on his SRM experience)", "BMC Helix Dashboards: Overview (WBT)"], "l2": ["Plan de aprendizaje BMC Helix CMDB 22.x: Administrator, comenzando con BMC Helix CMDB 22.x: Fundamentals Administering - Part 1 (WBT)", "BMC Helix Discovery 26.x: Fundamentals Concepts (WBT), luego el plan de aprendizaje BMC Discovery 24.x: Administrator", "Plan de aprendizaje BMC Helix Digital Workplace 23.x: Catalog Administrator (aprovecha su experiencia en SRM)", "BMC Helix Dashboards: Overview (WBT)"]}, "s3": {"en": ["BMC Certified Associate: Helix CMDB 22.x for Administrators Online Exam", "BMC Certified Associate: Discovery 24.x for Administrators Online Exam", "BMC Certified Associate: Helix Digital Workplace 23.x for Catalog Administrators Online Exam"], "l2": ["BMC Certified Associate: Helix CMDB 22.x for Administrators Online Exam", "BMC Certified Associate: Discovery 24.x for Administrators Online Exam", "BMC Certified Associate: Helix Digital Workplace 23.x for Catalog Administrators Online Exam"]}, "s4": {"en": ["Optional: BMC Certified Professional: Helix ITSM 22.x Online Proctored Exam"], "l2": ["Opcional: BMC Certified Professional: Helix ITSM 22.x Online Proctored Exam"]}, "boot": {"en": "CMDB Modernization (Dec 7).", "l2": "CMDB Modernization (7 de diciembre)."}}, {"n": "Edgar Pinedo", "role": {"en": "Digital Workplace, Dashboards and administration", "l2": "Digital Workplace, Dashboards y administración"}, "now": {"en": "Associate Helix ITSM 22.x (valid until Nov 2027); enrolled in the ITSM web-based subscription since May but has not logged in yet", "l2": "Associate Helix ITSM 22.x (vigente hasta nov 2027); inscrito en la suscripción ITSM Web-Based desde mayo, pero aún no ha entrado"}, "s1": {"en": ["Log in to Learn@Helix and confirm the subscription courses are visible", "BMC Helix ITSM 23.x: Fundamentals Administering Applications (ILT), for more depth in administration", "BMC HelixGPT 26.x: Fundamentals Concepts (WBT)"], "l2": ["Entrar a Learn@Helix y confirmar que ve los cursos de la suscripción", "BMC Helix ITSM 23.x: Fundamentals Administering Applications (ILT), para profundizar en administración", "BMC HelixGPT 26.x: Fundamentals Concepts (WBT)"]}, "s2": {"en": ["Learning plan BMC Helix Digital Workplace 23.x: Catalog Administrator", "Learning plan Helix Dashboards 26.3: Administrator/Developer", "AR System: BMC AR System 23.x: Fundamentals Administering - Part 1 (WBT)"], "l2": ["Plan de aprendizaje BMC Helix Digital Workplace 23.x: Catalog Administrator", "Plan de aprendizaje Helix Dashboards 26.3: Administrator/Developer", "AR System: BMC AR System 23.x: Fundamentals Administering - Part 1 (WBT)"]}, "s3": {"en": ["BMC Certified Associate: Helix Digital Workplace 23.x for Catalog Administrators Online Exam", "BMC Certified Associate: Helix ITSM 23.x for Administrators Online Exam"], "l2": ["BMC Certified Associate: Helix Digital Workplace 23.x for Catalog Administrators Online Exam", "BMC Certified Associate: Helix ITSM 23.x for Administrators Online Exam"]}, "s4": {"en": ["Optional: BMC Certified Professional: Helix ITSM 22.x Online Proctored Exam"], "l2": ["Opcional: BMC Certified Professional: Helix ITSM 22.x Online Proctored Exam"]}}, {"n": "Lissette López", "role": {"en": "Project Manager", "l2": "Project Manager"}, "now": {"en": "No Learn@Helix account yet: register with her Grupo Arión email and tell Nikki", "l2": "Aún sin cuenta en Learn@Helix: registrarse con su correo de Grupo Arión y avisar a Nikki"}, "s1": {"en": ["Learning plan BMC Helix ITSM 23.x: Users, starting with BMC Helix ITSM 23.x: Fundamentals Using (WBT)", "BMC HelixGPT 26.x: Fundamentals Concepts (WBT)"], "l2": ["Plan de aprendizaje BMC Helix ITSM 23.x: Users, comenzando con BMC Helix ITSM 23.x: Fundamentals Using (WBT)", "BMC HelixGPT 26.x: Fundamentals Concepts (WBT)"]}, "s2": {"en": ["Learning plan BMC Helix ITSM 23.x: Administrator, including BMC Helix ITSM 23.x: Fundamentals Administering Applications (ILT), to understand configuration, module setup and dependencies for planning and estimating"], "l2": ["Plan de aprendizaje BMC Helix ITSM 23.x: Administrator, incluido BMC Helix ITSM 23.x: Fundamentals Administering Applications (ILT), para entender configuración, habilitación de módulos y dependencias al planear y estimar"]}, "s3": {"en": ["BMC Certified Associate: Helix ITSM 23.x for Administrators Online Exam, as her foundations certification"], "l2": ["BMC Certified Associate: Helix ITSM 23.x for Administrators Online Exam, como certificación de fundamentos"]}}, {"n": "Osvaldo Jiménez", "role": {"en": "Strategic view of the Helix portfolio · presales", "l2": "Visión estratégica del portafolio Helix · preventa"}, "now": {"en": "Partner Sales Foundation completed (Oct 26, 2026)", "l2": "Partner Sales Foundation completada (26 de octubre de 2026)"}, "s1": {"en": ["BMC Helix ITSM 23.x: Fundamentals Using (WBT)", "BMC HelixGPT 26.x: Fundamentals Concepts (WBT)"], "l2": ["BMC Helix ITSM 23.x: Fundamentals Using (WBT)", "BMC HelixGPT 26.x: Fundamentals Concepts (WBT)"]}, "s2": {"en": ["To define with Osvaldo: the areas he wants to go deeper in"], "l2": ["Por definir con Osvaldo: las áreas en las que quiere profundizar"]}, "s4": {"en": ["Keep Partner Sales Foundation current and take the Solution Demo Bootcamp when it is scheduled"], "l2": ["Mantener vigente Partner Sales Foundation y tomar el Solution Demo Bootcamp cuando se programe"]}}, {"n": "Israel Ortega", "role": {"en": "To confirm with Quadrax", "l2": "Por confirmar con Quadrax"}, "now": {"en": "Partner Sales Foundation completed (Jun 2026); two Dashboards courses in progress", "l2": "Partner Sales Foundation completada (jun 2026); dos cursos de Dashboards en curso"}, "s1": {"en": ["Finish BMC Helix Dashboards 23.x: Fundamentals Using (WBT) and BMC Helix Dashboards 23.x: Fundamentals Migrating Reports (WBT)"], "l2": ["Terminar BMC Helix Dashboards 23.x: Fundamentals Using (WBT) y BMC Helix Dashboards 23.x: Fundamentals Migrating Reports (WBT)"]}}], "bootcamps": [{"name": "CMDB Modernization", "date": "2026-12-07", "pre": {"en": "ITIL/ITSM basics and Innovation Studio administration skills", "l2": "Bases de ITIL/ITSM y conocimientos de administración de Innovation Studio"}, "who": "Victor Romero"}, {"name": "HelixGPT", "date": "2026-12-14", "pre": {"en": "None on file", "l2": "Sin requisito registrado"}, "who": "Eduardo Parada"}, {"name": "ITSM-ITOM On Prem", "date": "2026-12-15", "pre": {"en": "Linux and Kubernetes skills", "l2": "Conocimientos de Linux y Kubernetes"}, "who": "Ricardo Simancas, Eduardo Parada"}, {"name": "Agent Creation", "date": "2026-11-30", "pre": {"en": "None required", "l2": "Sin requisito"}, "who": {"en": "Eduardo Parada (next session if Nov 30 is too soon)", "l2": "Eduardo Parada (próxima sesión si el 30 de noviembre es muy pronto)"}}], "paths": [{"k": "itsm", "title": {"en": "ITSM foundation (everyone)", "l2": "Base de ITSM (todo el equipo)"}, "who": {"en": "Whole team", "l2": "Todo el equipo"}, "plans": [["BMC Helix ITSM 23.x: Administrator", "29/bmc-helix-itsm-23x-administrator"], ["BMC Helix ITSM 23.x: Users", "30/bmc-helix-itsm-23x-users"]], "steps": ["BMC Helix ITSM 23.x: Fundamentals Using (WBT)", "BMC Helix ITSM 23.x: Fundamentals Administering Applications (ILT)"], "exam": ["BMC Certified Associate: Helix ITSM 23.x for Administrators Online Exam", "BMC Certified Professional: Helix ITSM 22.x Online Proctored Exam"]}, {"k": "itsm", "title": {"en": "Digital Workplace Catalog", "l2": "Digital Workplace Catalog"}, "who": "Victor Romero, Alberto Zavaleta, Edgar Pinedo", "plans": [["BMC Helix Digital Workplace 23.x: Catalog Administrator", "25/bmc-helix-digital-workplace-23x-catalog-administrator"]], "steps": ["BMC Helix Digital Workplace 23.x: Fundamentals Configuring Service Catalog and Workflows - Part 1 (WBT)", "BMC Helix Digital Workplace 23.x: Fundamentals Configuring Service Catalog and Workflows - Part 2 (ASP)"], "exam": ["BMC Certified Associate: Helix Digital Workplace 23.x for Catalog Administrators Online Exam"], "deep": "BMC Helix Digital Workplace 23.x: Fundamentals Configuring Service Catalog and Workflows - Part 3 (ILT)"}, {"k": "plat", "title": {"en": "Development: Innovation Studio and Business Workflows", "l2": "Desarrollo: Innovation Studio y Business Workflows"}, "who": "Ricardo Simancas, Alberto Zavaleta, Eduardo Parada", "plans": [["BMC Helix Innovation Studio 26.x: Administrators/Developer", "69/bmc-helix-innovation-studio-26x-administratorsdeveloper"], ["BMC Helix Business Workflows 23.x: Administrators", "11/bmc-helix-business-workflows-23x-administrators"]], "steps": ["BMC Helix Innovation Studio 26.x: Fundamentals Developing (WBT)", "BMC Helix Business Workflows 23.x: Fundamentals Using (WBT)", "BMC Helix Business Workflows 23.x: Fundamentals Administering (ASP)"], "exam": ["BMC Certified Associate: Helix Innovation Studio 26.x for Developers Online Exam", "BMC Certified Associate: Helix Business Workflows 23.x for Administrators Online Exam"], "deep": {"en": "Helix Innovation Studio 26.x: Developing a Codeless Application (ILT) · Helix Innovation Studio 26.x: Process Designer (ILT) · BMC Helix Business Workflows 23.x: Advanced Administering (ILT)", "l2": "Helix Innovation Studio 26.x: Developing a Codeless Application (ILT) · Helix Innovation Studio 26.x: Process Designer (ILT) · BMC Helix Business Workflows 23.x: Advanced Administering (ILT)"}}, {"k": "plat", "title": {"en": "Migrations: Helix Data Manager", "l2": "Migraciones: Helix Data Manager"}, "who": {"en": "Candidate to be named", "l2": "Candidato por definir"}, "plans": [["BMC Helix Data Manager 21.x: Administrators", "19/bmc-helix-data-manager-21x-administrators"]], "steps": ["BMC Helix Data Manager 21.x: Fundamentals Using (WBT)", "BMC Helix Data Manager 21.x: Fundamentals Migrating (ASP)"], "exam": ["BMC Certified Associate: Helix Data Manager for Administrators Online Exam"], "deep": "BMC Helix Data Manager 21.x: Fundamentals Administering (ILT)"}, {"k": "plat", "title": {"en": "On-premises installation: containers and Kubernetes", "l2": "Instalación on-premises: contenedores y Kubernetes"}, "who": "Ricardo Simancas, Eduardo Parada", "plans": [["BMC Helix Service Management On-Premises Deployment", "38/bmc-helix-service-management-on-premises-deployment"]], "steps": ["BMC Helix Service Management: Planning On-Premises Deployment (WBT)", "Fundamentos de Kubernetes"], "exam": ["BMC Certified Associate: Helix Service Management On-Premises Deployment 25.x Online Exam"], "deep": {"en": "ITSM-ITOM On Prem bootcamp (Dec 15, by nomination)", "l2": "Bootcamp ITSM-ITOM On Prem (15 de diciembre, por nominación)"}}, {"k": "plat", "title": {"en": "Dashboards", "l2": "Dashboards"}, "who": "Alberto Zavaleta, Edgar Pinedo, Victor Romero", "plans": [["Helix Dashboards 26.3: Administrator/Developer", "141/helix-dashboards-263-administratordeveloper"]], "steps": ["BMC Helix Dashboards: Overview (WBT)"]}, {"k": "disc", "title": {"en": "CMDB and Discovery", "l2": "CMDB y Discovery"}, "who": "Victor Romero, Eduardo Parada", "plans": [["BMC Helix CMDB 22.x: Administrator", "14/bmc-helix-cmdb-22x-administrator"], ["BMC Discovery 24.x: Administrator", "6/bmc-discovery-24x-administrator"]], "steps": ["BMC Helix CMDB 22.x: Fundamentals Administering - Part 1 (WBT)", "BMC Helix Discovery 26.x: Fundamentals Concepts (WBT)"], "exam": ["BMC Certified Associate: Helix CMDB 22.x for Administrators Online Exam", "BMC Certified Associate: Discovery 24.x for Administrators Online Exam"], "deep": {"en": "CMDB Modernization bootcamp (Dec 7, by nomination)", "l2": "Bootcamp CMDB Modernization (7 de diciembre, por nominación)"}}, {"k": "gpt", "title": {"en": "HelixGPT and AI agents", "l2": "HelixGPT y agentes de IA"}, "who": {"en": "Whole team (foundation) · Eduardo Parada (agents)", "l2": "Todo el equipo (base) · Eduardo Parada (agentes)"}, "plans": [["BMC HelixGPT Users", "43/bmc-helixgpt-users"], ["BMC HelixGPT Agentic AI", "42/bmc-helixgpt-agentic-ai"], ["HelixGPT Administrators", "45/helixgpt-administrators"]], "steps": ["BMC HelixGPT 26.x: Fundamentals Concepts (WBT)", "Building Agents with HelixGPT Agent Studio"], "exam": ["BMC Certified Associate: HelixGPT 26.x for Users Online Exam"], "deep": "HelixGPT 26.3: Fundamentals of Agent Design (ILT)"}]};
+const L = {
+ NIKKI:"nicole.sanchez@helixops.ai", TEAM:"partner.success@helixops.ai", NET:"Partner.Network@helixops.ai",
+ LEARN:"https://learn.helixops.ai/", HOME:"https://learn.helixops.ai/pages/42/helix-learning-partner-home",
+ SDB:"https://learn.helixops.ai/learn/courses/29281/bmc-helix-solution-demo-bootcamp-ilt",
+ CAL:"https://ngsanchez124-dot.github.io/bootcamp-schedule/",
+ TRACKS:"https://www.helixops.ai/content/dam/bmc/education/BMCHelix_Learning_Tracks.pdf",
+ REG:"https://webapps.helixops.ai/register/index.html",
+ CHECK:"https://community.helixops.ai/s/news/a7MVu000006uyf5MAA/partner-onboarding-checklist-for-solution-provider-partners",
+ QS:"https://www.helixops.ai/content/dam/partnerhelp/documents/register-for-bmc-helix-resources-quick-start.pdf",
+ LP:"https://learn.helixops.ai/learn/learning-plans/"
+};
+const PN = PARTNER.name, L2 = PARTNER.lang;
+const IDX = {en:0, es:1};
+const LOCALE = {en:"en-US", es:"es-MX"};
+// Every string: [English, Spanish]. {p} = partner name.
+const S = {
+ title:["Education & Readiness Review","Revisión de formación y preparación"],
+ theme:["Theme","Tema"],
+ banner:["This review is also available in English.","Esta revisión está disponible completa en español."],
+ bannerBtn:["Read in English","Leer en español"],
+ n_overview:["Overview","Resumen"], n_team:["Team","Equipo"], n_plans:["Plans by person","Planes por persona"], n_certs:["Certifications","Certificaciones"],
+ n_coverage:["Coverage","Cobertura"], n_paths:["Learning paths","Rutas de aprendizaje"], n_program:["Program & links","Programa y enlaces"],
+ asOf:["Data as of","Datos al"],
+ source:["Learn@Helix course and certification records for the {p} branch, the team profiles {p} shared on November 18, and program information.","Registros de cursos y certificaciones de Learn@Helix del grupo de {p}, los perfiles del equipo que {p} compartió el 18 de noviembre e información del programa."],
+ s_active:["Active","Activo"], s_slipping:["Slowing","Disminuyendo"], s_stale:["Inactive","Inactivo"], s_never:["Not started","Sin iniciar"],
+ statusHelp:["Active: learning activity in the last 30 days. Slowing: 31 to 90 days. Inactive: more than 90 days. Not started: no recorded activity.","Activo: actividad de aprendizaje en los últimos 30 días. Disminuyendo: de 31 a 90 días. Inactivo: más de 90 días. Sin iniciar: sin actividad registrada."],
+ ov_h1:["Where {p}'s Helix team stands, and the plan by stage","Dónde está el equipo Helix de {p} y el plan por etapas"],
+ ov_lede:["{p}'s Learn@Helix record, mapped against the profiles and specializations {p} defined for each consultant, with a plan in four stages: common foundation, technical specialization, certifications and continuous update.","El historial de Learn@Helix de {p}, comparado con los perfiles y especializaciones que {p} definió para cada consultor, con un plan en cuatro etapas: formación común, especialización técnica, certificaciones y actualización continua."],
+ st_people:["people in {p}'s Learn@Helix branch","personas en el grupo de {p} en Learn@Helix"],
+ st_active30:["active in the last 30 days","activas en los últimos 30 días"],
+ st_certs:["active Helix certifications","certificaciones Helix vigentes"],
+ st_holders:["certified people","personas certificadas"],
+ st_done:["courses completed","cursos completados"],
+ st_prog:["in progress","en curso"],
+ st_rate:["completion rate","tasa de finalización"],
+ st_paths:["learning paths ready","rutas de aprendizaje listas"],
+ st_paths_s:["Exact Learn@Helix titles and links","Títulos y enlaces exactos de Learn@Helix"],
+ ov_means:["What this means","Qué significa"],
+ ov_base_h:["Common foundation","Formación común"],
+ ov_gap_h:["The gap to close","La brecha por cerrar"],
+ ov_next_h:["Next 30 days","Próximos 30 días"],
+ ov_incl_b:["Included for every {p} consultant:","Incluido para cada consultor de {p}:"],
+ ov_incl:["foundational web-based training and Certified Associate exams are an included entitlement for all Helix partners. Registered users receive it automatically.","la formación web de fundamentos y los exámenes Certified Associate están incluidos para todos los socios de Helix. Los usuarios registrados los reciben automáticamente."],
+ ov_stages:["The four stages","Las cuatro etapas"],
+ ov_activity:["Team activity","Actividad del equipo"],
+ tm_h1:["Consultant roster","Listado de consultores"],
+ tm_lede:["Everyone in {p}'s Learn@Helix branch. Select a row to see that person's courses and certifications.","Todas las personas del grupo de {p} en Learn@Helix. Seleccione una fila para ver sus cursos y certificaciones."],
+ tm_search:["Search by name","Buscar por nombre"], tm_all:["All statuses","Todos los estados"],
+ c_name:["Name","Nombre"], c_done:["Courses done","Cursos completados"], c_prog:["In progress","En curso"],
+ c_certs:["Active certs","Cert. vigentes"], c_areas:["Main areas","Áreas principales"], c_last:["Last activity","Última actividad"],
+ tm_note:["People who are registered but have not enrolled in any course yet, or who do not have an account yet, do not appear here.","Las personas registradas que aún no se inscribieron en ningún curso, o que aún no tienen cuenta, no aparecen aquí."],
+ tm_none:["No one matches this filter.","Nadie coincide con este filtro."],
+ d_valid:["valid until","vigente hasta"], d_expired:["expired","vencida"], d_nocerts:["No certifications yet.","Aún sin certificaciones."],
+ d_courses:["Courses","Cursos"], d_completed:["completed","completado"], d_inprog:["in progress","en curso"], d_enrolled:["enrolled","inscrito"],
+ d_more:["more","más"], d_nocourses:["No course activity yet.","Aún sin actividad en cursos."],
+ pl_h1:["A plan for each consultant","Un plan para cada consultor"],
+ pl_lede:["Built from the profile and specialization {p} defined for each person. Each plan follows the four stages; target dates assume a December start.","Construido a partir del perfil y la especialización que {p} definió para cada persona. Cada plan sigue las cuatro etapas; las fechas meta suponen un inicio en diciembre."],
+ pl_focus:["Focus","Enfoque"], pl_now:["Today in Learn@Helix","Hoy en Learn@Helix"],
+ st1:["1. Common foundation","1. Formación común"], st2:["2. Specialization","2. Especialización"], st3:["3. Certifications","3. Certificaciones"], st4:["4. Continuous update","4. Actualización continua"],
+ pl_boot:["Recommended bootcamps","Bootcamps recomendados"],
+ bc_h:["Upcoming bootcamps that fit this plan","Próximos bootcamps que encajan con este plan"],
+ bc_lede:["Seats are by nomination. Tell Nikki who should attend and she will submit the nominations.","Los lugares son por nominación. Indíquenle a Nikki quién debe asistir y ella envía las nominaciones."],
+ c_bootcamp:["Bootcamp","Bootcamp"], c_date:["Session","Sesión"], c_prereq:["Prerequisite","Requisito"], c_who:["Recommended for","Recomendado para"],
+ ce_h1:["Certification register","Registro de certificaciones"],
+ ce_lede:["Every Helix certification held by {p}'s team, ordered by renewal date so nothing lapses unnoticed.","Todas las certificaciones Helix del equipo de {p}, ordenadas por fecha de renovación para que ninguna venza sin aviso."],
+ ce_active:["active","vigentes"], ce_renew:["renew by March 31, 2027","renovar antes del 31 de marzo de 2027"],
+ ce_all:["All certifications","Todas las certificaciones"],
+ c_cert:["Certification","Certificación"], c_holder:["Holder","Titular"], c_level:["Level","Nivel"],
+ c_issued:["Issued","Emitida"], c_renewby:["Renew by","Renovar antes de"], v_valid:["Valid","Vigente"], v_expired:["Expired","Vencida"],
+ co_h1:["Coverage by product area","Cobertura por área de producto"],
+ co_lede:["Who has learned and who is certified in each Helix product area. Areas marked Focus are the specializations {p} defined for the team.","Quién se ha formado y quién está certificado en cada área de producto Helix. Las áreas marcadas como Enfoque son las especializaciones que {p} definió para el equipo."],
+ co_area:["Product area","Área de producto"], co_bar:["People with completed courses","Personas con cursos completados"],
+ co_learn:["Learners","Personas"], co_cert:["Certified","Certificadas"], focus:["Focus","Enfoque"],
+ co_min:["Recommended minimum for delivery: at least one Associate-certified consultant per product in each active project, and a named lead who has completed the advanced track or bootcamp.","Mínimo recomendado para la entrega: al menos un consultor con certificación Associate por producto en cada proyecto activo, y un líder designado que haya completado la ruta avanzada o el bootcamp."],
+ pa_h1:["Learning paths by area","Rutas de aprendizaje por área"],
+ pa_lede:["Each path runs the same way: foundations, an Associate exam, then advanced or instructor-led depth. Titles and links are exactly as listed in Learn@Helix.","Cada ruta sigue el mismo orden: fundamentos, un examen Associate y luego profundización avanzada o con instructor. Los títulos y enlaces son exactamente los de Learn@Helix."],
+ pa_start:["Start with","Comenzar con"], pa_certify:["Certify","Certificarse"], pa_deep:["Go deeper","Profundizar"], pa_who:["For","Para"],
+ pa_tracks:["Every course and exam is also listed in the","Todos los cursos y exámenes también figuran en la"],
+ pa_tracks_l:["Helix Learning Paths and Certifications guide (PDF)","guía Helix Learning Paths and Certifications (PDF)"],
+ pr_h1:["Program, contacts and links","Programa, contactos y enlaces"],
+ pr_incl:["Foundations and Associate exams are included for everyone.","Los fundamentos y los exámenes Associate están incluidos para todos."],
+ pr_links:["Links","Enlaces"], open:["Open","Abrir"],
+ lk_home:["Helix Learning partner home (sign in)","Página de socios de Helix Learning (iniciar sesión)"],
+ lk_cal:["Helix bootcamp calendar","Calendario de bootcamps Helix"],
+ lk_sdb:["Solution Demo Bootcamp registration","Inscripción al Solution Demo Bootcamp"],
+ lk_tracks:["Learning Paths and Certifications guide (PDF)","Guía de rutas de aprendizaje y certificaciones (PDF)"],
+ lk_check:["Partner onboarding checklist","Lista de verificación de incorporación de socios"],
+ lk_qs:["Registration quick start guide (PDF)","Guía rápida de registro (PDF)"],
+ lk_reg:["Helix account registration (new colleagues)","Registro de cuenta Helix (nuevos colegas)"],
+ pr_bring:["Bringing a colleague onto Helix","Cómo incorporar a un colega a Helix"],
+ b1:["Register a Helix account at","Registrar una cuenta Helix en"],
+ b1b:["with a {p} business email.","con un correo corporativo de {p}."],
+ b2:["Complete every required profile field, including phone dial code and language.","Completar todos los campos obligatorios del perfil, incluidos el código telefónico y el idioma."],
+ b3:["Activate the account from the verification email.","Activar la cuenta desde el correo de verificación."],
+ b4:["For Sales Edge and Solution Partner Place access, email","Para acceder a Sales Edge y Solution Partner Place, escribir a"],
+ b5:["Send the name to Nikki; she adds the person to the Learn@Helix partner subscription.","Enviar el nombre a Nikki; ella agrega a la persona a la suscripción de socio en Learn@Helix."],
+ pr_contacts:["Contacts","Contactos"], c_for:["For","Para"], c_contact:["Contact","Contacto"], c_email:["Email","Correo"],
+ k_enable:["Enablement, learning paths, certification","Habilitación, rutas de aprendizaje, certificación"],
+ k_team:["Partner Success team","Equipo de Partner Success"],
+ k_pm:["Partnership and opportunities","Alianza y oportunidades"],
+ k_net:["Sales Edge and Solution Partner Place access","Acceso a Sales Edge y Solution Partner Place"],
+ pm_title:["Partner Manager","Partner Manager"],
+ copy:["Copy","Copiar"], copied:["Copied","Copiado"],
+ pdf:["Save as PDF","Guardar como PDF"],
+ foot:["Prepared by Nikki Sanchez, Partner Success Manager, Helix","Preparado por Nikki Sanchez, Partner Success Manager, Helix"],
+ foot2:["Course titles change over time; search Learn@Helix by product name if a title differs.","Los títulos de los cursos cambian con el tiempo; busque en Learn@Helix por nombre de producto si un título difiere."]
+};
+const FAM = {ops:["Operations Management & AIOps","Operations Management y AIOps"],disc:["Discovery & CMDB","Discovery y CMDB"],itsm:["ITSM & Digital Workplace","ITSM y Digital Workplace"],auto:["Automation","Automatización"],gpt:["HelixGPT & AI","HelixGPT e IA"],plat:["Platform & Innovation Studio","Plataforma e Innovation Studio"],sales:["Sales & Presales","Ventas y preventa"],other:["Other","Otros"]};
+const FOCUS = PARTNER.focus || [], PATHS = PARTNER.paths || [], PLANS = PARTNER.plans || [], BOOT = PARTNER.bootcamps || [];
+let lang = PARTNER.defaultLang === "en" ? "en" : L2;
+try{const s=localStorage.getItem("review-lang-"+PN); if(s==="en"||s===L2) lang=s;}catch(e){}
+const t=(k,v)=>{let x=(S[k]||[k])[IDX[lang]]||S[k][0]; x=x.split("{p}").join(PN); if(v) Object.keys(v).forEach(n=>{x=x.split("{"+n+"}").join(v[n]);}); return x;};
+const pick=o=>o==null?"":(typeof o==="string"?o:(lang==="en"?(o.en||""):(o.l2||o.en||"")));
+const fam=k=>FAM[k][IDX[lang]];
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const a=(u,x)=>`<a href="${u}" target="_blank" rel="noopener">${esc(x)}</a>`;
+const fd=d=>{if(!d)return "–";const x=new Date(d+"T00:00:00");return x.toLocaleDateString(LOCALE[lang],{day:"numeric",month:"short",year:"numeric"});};
+const P = DATA.people||[];
+const tot=(()=>{const r={people:P.length,enroll:0,done:0,prog:0,certs:0,bca:0,bcp:0,holders:0,expSoon:0,status:{active:0,slipping:0,stale:0,never:0}};
+  P.forEach(p=>{r.enroll+=p.enroll;r.done+=p.done;r.prog+=p.prog;r.certs+=p.certs;r.bca+=p.bca;r.bcp+=p.bcp;if(p.certs)r.holders++;r.status[p.status]++;
+    p.certList.forEach(c=>{if(c.active&&c.renew&&c.renew<="2027-03-31")r.expSoon++;});});r.rate=r.enroll?Math.round(100*r.done/r.enroll):0;return r;})();
+const famStats=(()=>{const f={};Object.keys(FAM).forEach(k=>f[k]={certPeople:new Set(),learners:new Set()});
+  P.forEach(p=>{p.certList.forEach(c=>{if(c.active&&f[c.fam])f[c.fam].certPeople.add(p.name);});p.courses.forEach(c=>{if(c.status==="Completed"&&f[c.fam])f[c.fam].learners.add(p.name);});});return f;})();
+const pill=s=>`<span class="pill p-${s}">${t("s_"+s)}</span>`;
+const list=xs=>`<ul class="small" style="margin:4px 0 0;padding-left:18px">${xs.map(i=>`<li>${esc(i)}</li>`).join("")}</ul>`;
+
+function overview(){
+  const r=tot;
+  return `<div class="kicker">${esc(PN)} x Helix</div>
+  <h1>${esc(t("ov_h1"))}</h1>
+  <p class="lede">${esc(t("ov_lede"))}</p>
+  <p class="small muted">${t("asOf")} ${fd(DATA.asOf)} · ${esc(t("source"))}</p>
+  <div class="grid g4" style="margin-top:18px">
+    <div class="card stat"><div class="v">${r.people}</div><div class="l">${esc(t("st_people"))}</div><div class="s">${r.status.active} ${t("st_active30")}</div></div>
+    <div class="card stat"><div class="v">${r.certs}</div><div class="l">${t("st_certs")}</div><div class="s">${r.holders} ${t("st_holders")} · ${r.bca} Associate · ${r.bcp} Professional</div></div>
+    <div class="card stat"><div class="v">${r.done}</div><div class="l">${t("st_done")}</div><div class="s">${r.prog} ${t("st_prog")}</div></div>
+    <div class="card stat"><div class="v">${PATHS.length}</div><div class="l">${t("st_paths")}</div><div class="s">${t("st_paths_s")}</div></div>
+  </div>
+  <h2>${t("ov_means")}</h2>
+  <div class="grid g3">
+    <div class="card"><h3>${t("ov_base_h")}</h3><p class="small">${esc(pick(PARTNER.base))}</p></div>
+    <div class="card"><h3>${t("ov_gap_h")}</h3><p class="small">${esc(pick(PARTNER.gap))}</p></div>
+    <div class="card"><h3>${t("ov_next_h")}</h3><p class="small">${esc(pick(PARTNER.next30))}</p></div>
+  </div>
+  <h2>${t("ov_stages")}</h2>
+  <div class="card"><ol class="steps small">${(PARTNER.stages||[]).map(s=>`<li><span><strong>${esc(pick(s.h))}</strong> ${esc(pick(s.d))}</span></li>`).join("")}</ol></div>
+  <div class="callout good"><strong>${esc(t("ov_incl_b"))}</strong> ${t("ov_incl")}</div>
+  <h2>${t("ov_activity")}</h2>
+  <div class="card"><div class="grid g4">${["active","slipping","stale","never"].map(s=>`<div>${pill(s)}<div class="stat"><div class="v" style="font-size:24px;margin-top:6px">${r.status[s]}</div></div></div>`).join("")}</div><p class="small muted" style="margin:12px 0 0">${t("statusHelp")}</p></div>`;
+}
+function team(){
+  return `<div class="kicker">${t("n_team")}</div><h1>${t("tm_h1")}</h1>
+  <p class="lede">${esc(t("tm_lede"))}</p>
+  <div class="controls"><input id="q" type="search" placeholder="${t("tm_search")}" aria-label="${t("tm_search")}">
+  <select id="fs" aria-label="Status"><option value="">${t("tm_all")}</option>${["active","slipping","stale","never"].map(s=>`<option value="${s}">${t("s_"+s)}</option>`).join("")}</select></div>
+  <div class="tbl"><table><thead><tr><th>${t("c_name")}</th><th>Status</th><th class="num">${t("c_done")}</th><th class="num">${t("c_prog")}</th><th class="num">${t("c_certs")}</th><th>${t("c_areas")}</th><th>${t("c_last")}</th></tr></thead><tbody id="rb"></tbody></table></div>
+  <p class="small muted">${t("statusHelp")} ${t("tm_note")}</p>`;
+}
+function fillTeam(){
+  const q=(document.getElementById("q").value||"").toLowerCase(), fs=document.getElementById("fs").value;
+  const rows=P.filter(p=>(!q||p.name.toLowerCase().includes(q))&&(!fs||p.status===fs));
+  document.getElementById("rb").innerHTML=rows.length?rows.map(p=>{const i=P.indexOf(p);return `<tr class="click" tabindex="0" data-i="${i}"><td><strong>${esc(p.name)}</strong></td><td>${pill(p.status)}</td><td class="num">${p.done}</td><td class="num">${p.prog}</td><td class="num">${p.certs}</td><td class="small">${p.top.map(f=>esc(fam(f))).join(", ")||"–"}</td><td class="small">${fd(p.last)}</td></tr><tr hidden id="d${i}"><td colspan="7"><div class="drawer">${drawer(p)}</div></td></tr>`;}).join(""):`<tr><td colspan="7" class="empty">${t("tm_none")}</td></tr>`;
+  document.querySelectorAll("tr.click").forEach(r=>{const go=()=>{const d=document.getElementById("d"+r.dataset.i);d.hidden=!d.hidden;};r.onclick=go;r.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go();}};});
+}
+function drawer(p){
+  const c=p.certList.length?`<ul>${p.certList.map(c=>`<li>${esc(c.title)} <span class="muted small">· ${c.active?t("d_valid"):t("d_expired")} ${fd(c.renew)}</span></li>`).join("")}</ul>`:`<p class="small muted">${t("d_nocerts")}</p>`;
+  const k=p.courses.slice(0,14);
+  return `<div class="grid g2"><div><h3>${t("n_certs")}</h3>${c}</div><div><h3>${t("d_courses")} (${p.enroll})</h3>${k.length?`<ul>${k.map(x=>`<li>${esc(x.title)} <span class="muted small">· ${x.status==="Completed"?t("d_completed"):x.status==="In Progress"?t("d_inprog"):t("d_enrolled")}</span></li>`).join("")}</ul>`:`<p class="small muted">${t("d_nocourses")}</p>`}</div></div>`;
+}
+function plans(){
+  return `<div class="kicker">${t("n_plans")}</div><h1>${t("pl_h1")}</h1>
+  <p class="lede">${esc(t("pl_lede"))}</p>
+  <div class="grid g2" style="margin-top:14px">${PLANS.map(x=>`<div class="card"><h3>${esc(x.n)}</h3><div class="who">${esc(pick(x.role))}</div>
+    <p class="small" style="margin:0 0 4px"><strong>${t("pl_now")}:</strong> ${esc(pick(x.now))}</p>
+    ${[["st1","s1"],["st2","s2"],["st3","s3"],["st4","s4"]].map(([h,k])=>x[k]?`<div class="stage"><b>${t(h)}</b>${list(lang==="en"?x[k].en:(x[k].l2||x[k].en))}</div>`:"").join("")}
+    ${x.boot?`<div class="stage"><b>${t("pl_boot")}</b><p class="small" style="margin:4px 0 0">${esc(pick(x.boot))}</p></div>`:""}
+  </div>`).join("")}</div>
+  ${BOOT.length?`<h2>${t("bc_h")}</h2><p class="small muted">${t("bc_lede")} ${a(L.CAL,t("lk_cal"))}</p>
+  <div class="tbl"><table><thead><tr><th>${t("c_bootcamp")}</th><th>${t("c_date")}</th><th>${t("c_prereq")}</th><th>${t("c_who")}</th></tr></thead><tbody>${BOOT.map(b=>`<tr><td><strong>${esc(b.name)}</strong></td><td class="small">${fd(b.date)}</td><td class="small">${esc(pick(b.pre))}</td><td class="small">${esc(pick(b.who))}</td></tr>`).join("")}</tbody></table></div>`:""}`;
+}
+function certs(){
+  const all=[];P.forEach(p=>p.certList.forEach(c=>all.push({...c,person:p.name})));all.sort((x,y)=>(x.renew||"9")<(y.renew||"9")?-1:1);
+  return `<div class="kicker">${t("n_certs")}</div><h1>${t("ce_h1")}</h1>
+  <p class="lede">${esc(t("ce_lede"))}</p>
+  <div class="grid g4"><div class="card stat"><div class="v">${tot.certs}</div><div class="l">${t("ce_active")}</div></div><div class="card stat"><div class="v">${tot.bca}</div><div class="l">Associate (BCA)</div></div><div class="card stat"><div class="v">${tot.bcp}</div><div class="l">Professional (BCP)</div></div><div class="card stat"><div class="v">${tot.expSoon}</div><div class="l">${t("ce_renew")}</div></div></div>
+  <h2>${t("ce_all")}</h2>
+  <div class="tbl"><table><thead><tr><th>${t("c_cert")}</th><th>${t("c_holder")}</th><th>${t("c_level")}</th><th>${t("c_issued")}</th><th>${t("c_renewby")}</th><th>Status</th></tr></thead><tbody>${all.map(c=>`<tr><td>${esc(c.title)}</td><td>${esc(c.person)}</td><td class="mono">${c.level}</td><td class="small">${fd(c.issued)}</td><td class="small">${fd(c.renew)}</td><td>${c.active?`<span class="pill p-active">${t("v_valid")}</span>`:`<span class="pill p-stale">${t("v_expired")}</span>`}</td></tr>`).join("")}</tbody></table></div>`;
+}
+function coverage(){
+  const keys=Object.keys(FAM).filter(k=>k!=="other"), max=Math.max(1,...keys.map(k=>famStats[k].learners.size));
+  return `<div class="kicker">${t("n_coverage")}</div><h1>${t("co_h1")}</h1>
+  <p class="lede">${esc(t("co_lede"))}</p>
+  <div class="card"><div class="fam-row small muted" style="padding-top:0"><span>${t("co_area")}</span><span>${t("co_bar")}</span><span class="num">${t("co_learn")}</span><span class="num">${t("co_cert")}</span></div>
+  ${keys.map(k=>{const s=famStats[k];return `<div class="fam-row"><span><strong>${esc(fam(k))}</strong>${FOCUS.includes(k)?`<span class="focus-tag">${t("focus")}</span>`:""}</span><div class="bar" aria-hidden="true"><i style="width:${Math.round(100*s.learners.size/max)}%"></i></div><span class="num">${s.learners.size}</span><span class="num"><strong>${s.certPeople.size}</strong></span></div>`;}).join("")}</div>
+  <div class="callout info">${t("co_min")}</div>`;
+}
+function paths(){
+  return `<div class="kicker">${t("n_paths")}</div><h1>${t("pa_h1")}</h1>
+  <p class="lede">${t("pa_lede")}</p>
+  <div class="grid g2" style="margin-top:14px">${PATHS.map(p=>`<div class="card path"><h3>${esc(pick(p.title)||fam(p.k))}${FOCUS.includes(p.k)?`<span class="focus-tag">${t("focus")}</span>`:""}</h3>
+   ${p.who?`<div class="who">${t("pa_who")}: ${esc(pick(p.who))}</div>`:""}
+   <p class="small" style="margin:4px 0 8px">${(p.plans||[]).map(([x,u])=>u?a(L.LP+u,x):esc(x)).join(" · ")}</p>
+   ${(p.steps||[]).length?`<div class="small"><strong>${t("pa_start")}</strong><ol>${p.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol></div>`:""}
+   ${(p.exam||[]).length?`<div class="small" style="margin-top:8px"><strong>${t("pa_certify")}</strong><ol>${p.exam.map(s=>`<li>${esc(s)}</li>`).join("")}</ol></div>`:""}
+   ${p.deep?`<div class="small" style="margin-top:8px"><strong>${t("pa_deep")}</strong>: ${esc(pick(p.deep))}</div>`:""}</div>`).join("")}</div>
+  <p class="small muted">${t("pa_tracks")} ${a(L.TRACKS,t("pa_tracks_l"))}.</p>`;
+}
+function program(){
+  const links=[[L.HOME,t("lk_home")],[L.LEARN,"Learn@Helix"],[L.CAL,t("lk_cal")],[L.SDB,t("lk_sdb")],[L.TRACKS,t("lk_tracks")],[L.CHECK,t("lk_check")],[L.QS,t("lk_qs")],[L.REG,t("lk_reg")]];
+  return `<div class="kicker">${t("n_program")}</div><h1>${t("pr_h1")}</h1>
+  <div class="grid g2">
+   <div class="card"><h3>${t("pr_bring")}</h3><ol class="steps small">
+   <li><span>${t("b1")} ${a(L.REG,"webapps.helixops.ai/register")} ${esc(t("b1b"))}</span></li>
+   <li>${t("b2")}</li><li>${t("b3")}</li>
+   <li><span>${t("b4")} <span class="mono">${L.NET}</span>.</span></li>
+   <li>${esc(t("b5"))}</li></ol><p class="small muted" style="margin:10px 0 0">${t("pr_incl")}</p></div>
+   <div class="card links"><h3>${t("pr_links")}</h3>${links.map(([u,x])=>`<a href="${u}" target="_blank" rel="noopener"><span>${esc(x)}</span><span>${t("open")} ↗</span></a>`).join("")}</div>
+  </div>
+  <h2>${t("pr_contacts")}</h2>
+  <div class="tbl"><table><thead><tr><th>${t("c_for")}</th><th>${t("c_contact")}</th><th>${t("c_email")}</th></tr></thead><tbody>
+   <tr><td>${t("k_enable")}</td><td>Nikki Sanchez, Partner Success Manager</td><td><span class="mono">${L.NIKKI}</span><button class="copy" data-c="${L.NIKKI}" type="button">${t("copy")}</button></td></tr>
+   <tr><td>${t("k_team")}</td><td>Helix Partner Success</td><td><span class="mono">${L.TEAM}</span><button class="copy" data-c="${L.TEAM}" type="button">${t("copy")}</button></td></tr>
+   ${PARTNER.partnerManager?`<tr><td>${t("k_pm")}</td><td>${esc(PARTNER.partnerManager)}, ${t("pm_title")}</td><td>Microsoft Teams</td></tr>`:""}
+   <tr><td>${t("k_net")}</td><td>Helix Partner Network</td><td><span class="mono">${L.NET}</span><button class="copy" data-c="${L.NET}" type="button">${t("copy")}</button></td></tr>
+  </tbody></table></div>
+  <p style="margin-top:18px"><button class="copy" type="button" id="pdfBtn" style="padding:7px 14px;margin:0">${t("pdf")}</button></p>`;
+}
+const VIEWS={overview,team,plans,certs,coverage,paths,program};
+let cur="overview";
+function render(){
+  document.documentElement.lang=lang;
+  document.title=PN+" · "+t("title");
+  document.getElementById("eyebrow").innerHTML=esc(PARTNER.legalName||PN)+" &nbsp;·&nbsp; Helix";
+  document.querySelector("[data-i='title']").textContent=t("title");
+  document.querySelector("[data-i='theme']").textContent=t("theme");
+  const other=lang==="en"?L2:"en";
+  document.querySelector("[data-i='bannerText']").textContent=S.banner[IDX[other]];
+  document.getElementById("bannerBtn").textContent=S.bannerBtn[IDX[other]];
+  document.getElementById("b-en").setAttribute("aria-pressed",lang==="en");document.getElementById("b-l2").setAttribute("aria-pressed",lang===L2);
+  document.getElementById("rail").innerHTML=Object.keys(VIEWS).map(k=>`<button type="button" class="tab" data-v="${k}" ${k===cur?'aria-current="page"':""}>${t("n_"+k)}</button>`).join("");
+  document.querySelectorAll("#rail .tab").forEach(b=>b.onclick=()=>go(b.dataset.v));
+  Object.keys(VIEWS).forEach(k=>{const s=document.getElementById("v-"+k);s.classList.toggle("on",k===cur);if(k===cur)s.innerHTML=VIEWS[k]();});
+  if(cur==="team"){fillTeam();document.getElementById("q").oninput=fillTeam;document.getElementById("fs").onchange=fillTeam;}
+  document.querySelectorAll(".copy[data-c]").forEach(b=>b.onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(b.dataset.c).then(()=>{b.textContent=t("copied");}).catch(()=>{});});
+  const pb=document.getElementById("pdfBtn"); if(pb) pb.onclick=()=>{Object.keys(VIEWS).forEach(k=>{document.getElementById("v-"+k).innerHTML=VIEWS[k]();});if(document.getElementById("rb"))fillTeam();window.print();setTimeout(render,500);};
+  document.getElementById("foot").innerHTML=`${t("foot")} · ${t("asOf")} ${fd(DATA.asOf)} · ${t("foot2")}`;
+}
+function setLang(l){lang=l;try{localStorage.setItem("review-lang-"+PN,l);}catch(e){}render();}
+document.getElementById("b-en").onclick=()=>setLang("en");document.getElementById("b-l2").onclick=()=>setLang(L2);
+document.getElementById("bannerBtn").onclick=()=>setLang(lang==="en"?L2:"en");
+document.getElementById("themeBtn").onclick=()=>{const r=document.documentElement,d=r.dataset.theme==="dark"||(!r.dataset.theme&&matchMedia("(prefers-color-scheme: dark)").matches);r.dataset.theme=d?"light":"dark";};
+function go(v){cur=v;render();try{window.scrollTo({top:0});}catch(e){}}
+render();
+</script>
+</body>
+</html>
